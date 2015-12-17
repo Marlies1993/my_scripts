@@ -1,0 +1,75 @@
+Alignment with Bowtie2 -X2000 -m1 (Bryan) --> samFile
+
+pesam2bedGraph.pl to make into bedFile
+
+pesam2Lengths2.pl to get Lengths file to analyze with R 
+		histogram file R to plot histograms and density plots
+		
+If files/lenghts/logs are the same --> cat all bedFiles to combine	
+			Combine files that are to big? 
+				gzip all separate files --> gzcat *bedGraph.gz | cat | gzip > GM-all.bedGraph.gz
+			If you want to read 20 lines of gzip file 
+				gzcat "filename" | head -20 
+		
+pebedGraph-unique.pl to get all unique positions and get rid of all pcr duplicates
+
+make wiggle file using Bedtools
+	bedtools genomecov -i [bedGraph file] -g [genome file] -bg > file [output.bedGraph]
+	
+Normalize wiggle files using Wiggle2Norm script 
+	Make sure that there are at least the amount of reads in each file to which you normalize
+	Visualize Normalized Wiggles using IGV, make sure they have the .bedGraph extension and to load it in log scale
+	
+	
+Peak calling using Macs14
+		macs14 -t [bedFile] -g hs -f BED	
+			make sure all strands are +
+			make sure it is the orignal bedFile from pesam2bedGraph
+			-g is genomesize option, already in the package human --> hs
+			-f flag the file type --> BED 
+
+Stretch peaks using stretchBedfile.pl
+		default is adding -500 bp to start and +500bp to end
+		
+Unique peaks between to files
+	bedtools intersect -v -a [file1] -b [file2] > [file1-2]
+	
+	
+PileUp using signal-element-stack
+	Use python to use this script
+		-i input file
+		-e element file (Need to be sorted)
+		-g genome file
+		-w pile up width (per site of midpoint)
+		-b number of bins (optional)
+		--mp if element is range and take midpoint of the element otherwise assume midpoint is actually start or end (depending on + or -) (like TSS)
+		--sm Sort + takes highest 5000 intensity 
+		-v verbose; track calculation
+		--sc signal column, use 3 in bedgraph files, now default, so not necesarry
+		--me max elements
+		--ya fix y axis from the aggregate plot
+		--az assume zero for missing signals
+	Draw heatmap with matrix output file
+		git/cworld-dekker/scripts/perl/heaptmap.pl
+			-i input
+			-v verbose, track calculation
+			--end max value dark color
+	
+	
+Load compartment track in IGV by using compartments2IGV 
+	Changes 'nan' into 0
+	
+Get element files on Encode website http://genome.ucsc.edu/cgi-bin/hgFileSearch?db=hg19	
+	
+Cluster matrix on website or with new python script by Bryan
+
+
+	
+		
+		
+		
+
+					
+	
+	
+			

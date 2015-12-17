@@ -1,0 +1,106 @@
+data<-read.table("ATAC-GM-Combined.sam.gz.LENGTHS2",header=F,sep="\t")
+GM<-data
+data<-read.table("ATAC-HFF-Combined.sam.gz.LENGTHS2",header=F,sep="\t")
+HFF<-data
+data<-read.table("ATAC-SYNC-Combined.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC<-data
+
+histograms
+myhist.GM<-hist(GM$V1,breaks=1000,main="fragment length GM",xlab="fragment length",)
+myhist.HFF<-hist(HFF$V1,breaks=1000,main="fragment length HFF",xlab="fragment length",)
+myhist.SYNC<-hist(SYNC$V1,breaks=1000,main="fragment length SYNC",xlab="fragment length",)
+plot (myhist.GM,col=rgb(1,0,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",xlim=c(0,1000),main="ATAC-seq Fragment lengths")
+plot (myhist.HFF,col=rgb(0,1,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC,col=rgb(0,0,1,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+legend("topright", inset=.05,c("GM","HFF","SYNC"), fill=c(rgb(1,0,0,0.3),rgb(0,1,0,0.3),rgb(0,0,1,0.3)), horiz=FALSE)
+
+Density plots (always plot hist first)
+plot(myhist.GM$mids,myhist.GM$density,type="n",yaxt="n",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1000))
+lines(myhist.GM$mids,myhist.GM$density,col="red",lwd=2.5,type="l")
+lines(myhist.HFF$mids,myhist.HFF$density,col="green",lwd=2.5,type="l")
+lines(myhist.SYNC$mids,myhist.SYNC$density,col="blue",lwd=2.5,type="l")
+legend("topright", inset=.05,c("GM Non Synchronized","HFF Non Synchronized","HFF Metaphase"), fill=c(rgb(1,0,0),rgb(0,1,0),rgb(0,0,1)), horiz=FALSE)
+
+Density plots log 
+plot(myhist.GM$mids,myhist.GM$density,type="n",log="y",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1300),ylim=c(1e-6,1e-1),yaxt="n")
+lines(myhist.GM$mids,myhist.GM$density,col="red",lwd=2.5,type="l")
+lines(myhist.HFF$mids,myhist.HFF$density,col="green",lwd=2.5,type="l")
+lines(myhist.SYNC$mids,myhist.SYNC$density,col="blue",lwd=2.5,type="l")
+legend("topright", inset=.05,c("GM Non Synchronized","HFF Non Synchronized","HFF Metaphase"), fill=c(rgb(1,0,0),rgb(0,1,0),rgb(0,0,1)), horiz=FALSE)
+
+
+
+
+
+
+data<-read.table("ATAC-2-1-TAAGGCGA.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC1<-data
+data<-read.table("ATAC-2-2-CGTACTAG.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC2<-data
+data<-read.table("ATAC-2-3-AGGCAGAA.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC3<-data
+data<-read.table("ATAC-2-4-TCCTGAGC.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC4<-data
+data<-read.table("ATAC-2-5-GGACTCCT.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC5<-data
+data<-read.table("ATAC-2-6-TAGGCATG.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC6<-data
+data<-read.table("ATAC-2-7-CTCTCTAC.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC7<-data
+data<-read.table("ATAC-2-8-CAGAGAGG.sam.gz.LENGTHS2",header=F,sep="\t")
+SYNC8<-data
+
+myhist.SYNC1<-hist(SYNC1$V1,breaks=1000,main="fragment length SYNC1",xlab="fragment length",)
+myhist.SYNC2<-hist(SYNC2$V1,breaks=1000,main="fragment length SYNC2",xlab="fragment length",)
+myhist.SYNC3<-hist(SYNC3$V1,breaks=1000,main="fragment length SYNC3",xlab="fragment length",)
+myhist.SYNC4<-hist(SYNC4$V1,breaks=1000,main="fragment length SYNC4",xlab="fragment length",)
+myhist.SYNC5<-hist(SYNC5$V1,breaks=1000,main="fragment length SYNC5",xlab="fragment length",)
+myhist.SYNC6<-hist(SYNC6$V1,breaks=1000,main="fragment length SYNC6",xlab="fragment length",)
+myhist.SYNC7<-hist(SYNC7$V1,breaks=1000,main="fragment length SYNC7",xlab="fragment length",)
+myhist.SYNC8<-hist(SYNC8$V1,breaks=1000,main="fragment length SYNC8",xlab="fragment length",)
+plot (myhist.SYNC1,col=rgb(1,0,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",xlim=c(0,1000),main="ATAC-seq Fragment lengths")
+plot (myhist.SYNC2,col=rgb(0,1,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC3,col=rgb(0,0,1,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC4,col=rgb(1,0,1,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC5,col=rgb(0,1,1,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC6,col=rgb(1,1,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC7,col=rgb(0,0,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+plot (myhist.SYNC8,col=rgb(0,0,1,0.7),border=F,yaxt="n",xlab="fragment length (bp)",add=TRUE)
+legend("topright", inset=.05,c("SYNC1","SYNC2","SYNC3","SYNC4","SYNC5","SYNC6","SYNC7","SYNC8"), fill=c(rgb(1,0,0,0.3),rgb(0,1,0,0.3),rgb(0,0,1,0.3),rgb(1,0,1,0.3),rgb(0,1,1,0.3),rgb(1,1,0,0.3),rgb(0,0,0,0.3),rgb(0,0,0,0.7)), horiz=FALSE)
+
+plot(myhist.SYNC1$mids,myhist.SYNC1$density,type="n",yaxt="n",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1000))
+lines(myhist.SYNC1$mids,myhist.SYNC1$density,col=rgb(1,0,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC2$mids,myhist.SYNC2$density,col=rgb(0,1,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC3$mids,myhist.SYNC3$density,col=rgb(0,0,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC4$mids,myhist.SYNC4$density,col=rgb(1,0,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC5$mids,myhist.SYNC5$density,col=rgb(0,1,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC6$mids,myhist.SYNC6$density,col=rgb(1,1,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC7$mids,myhist.SYNC7$density,col=rgb(1,1,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC8$mids,myhist.SYNC8$density,col=rgb(0,0,1,0.3),lwd=2.5,type="l")
+legend("topright", inset=.05,c("SYNC1","SYNC2","SYNC3","SYNC4","SYNC5","SYNC6","SYNC7","SYNC8"), fill=c(rgb(1,0,0,0.3),rgb(0,1,0,0.3),rgb(0,0,1,0.3),rgb(1,0,1,0.3),rgb(0,1,1,0.3),rgb(1,1,0,0.3),rgb(0,0,0,0.3),rgb(0,0,0,0.7)), horiz=FALSE)
+
+plot(myhist.SYNC1$mids,myhist.SYNC1$density,type="n",log="y",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1300),ylim=c(1e-6,1e-1),yaxt="n")
+lines(myhist.SYNC1$mids,myhist.SYNC1$density,col=rgb(1,0,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC2$mids,myhist.SYNC2$density,col=rgb(0,1,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC3$mids,myhist.SYNC3$density,col=rgb(0,0,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC4$mids,myhist.SYNC4$density,col=rgb(1,0,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC5$mids,myhist.SYNC5$density,col=rgb(0,1,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC6$mids,myhist.SYNC6$density,col=rgb(1,1,0,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC7$mids,myhist.SYNC7$density,col=rgb(1,1,1,0.3),lwd=2.5,type="l")
+lines(myhist.SYNC8$mids,myhist.SYNC8$density,col=rgb(0,0,1,0.3),lwd=2.5,type="l")
+legend("topright", inset=.05,c("SYNC1","SYNC2","SYNC3","SYNC4","SYNC5","SYNC6","SYNC7","SYNC8"), fill=c(rgb(1,0,0,0.3),rgb(0,1,0,0.3),rgb(0,0,1,0.3),rgb(1,0,1,0.3),rgb(0,1,1,0.3),rgb(1,1,0,0.3),rgb(0,0,0,0.3),rgb(0,0,0,0.7)), horiz=FALSE)
+
+SYNC.ALL <- data
+myhist.SYNC.ALL<-hist(SYNC.ALL$V1,breaks=1000,main="fragment length SYNC.ALL",xlab="fragment length",)
+plot (myhist.SYNC.ALL,col=rgb(1,0,0,0.3),border=F,yaxt="n",xlab="fragment length (bp)",xlim=c(0,1000),main="ATAC-seq Fragment lengths")
+legend("topright", inset=.05,c("SYNC.ALL"), fill=c(rgb(1,0,0)), horiz=FALSE)
+
+plot(myhist.SYNC.ALL$mids,myhist.SYNC.ALL$density,type="n",yaxt="n",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1000))
+lines(myhist.SYNC.ALL$mids,myhist.SYNC.ALL$density,col=rgb(1,0,0),lwd=2.5,type="l")
+legend("topright", inset=.05,c("SYNC.ALL"), fill=c(rgb(1,0,0)), horiz=FALSE)
+
+plot(myhist.SYNC.ALL$mids,myhist.SYNC.ALL$density,type="n",log="y",ylab="frequency",xlab="lenght of fragment (bp)",xlim=c(0,1300),ylim=c(1e-6,1e-1),yaxt="n")
+lines(myhist.SYNC.ALL$mids,myhist.SYNC.ALL$density,col=rgb(1,0,0),lwd=2.5,type="l")
+legend("topright", inset=.05,c("SYNC.ALL"), fill=c(rgb(1,0,0)), horiz=FALSE)
+
+
